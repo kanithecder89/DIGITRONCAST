@@ -3,186 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIGITRONCAST - AI Powered Digital Marketing</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>DIGITRONCAST - Marketing Systems</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Default Theme: Dark (Light Black) */
         :root {
-            --bg-primary: #050505;
-            --bg-secondary: #0f172a;
-            --bg-tertiary: #1a0b2e;
-            --accent-purple: #8b5cf6;
-            --accent-cyan: #06b6d4;
-            --accent-purple-glow: rgba(139, 92, 246, 0.3);
-            --accent-cyan-glow: rgba(6, 182, 212, 0.3);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
+            --bg-primary: #0b0b0b;
+            --bg-secondary: #141414;
+            --card-bg: #1a1a1a;
+            --text-primary: #f5f5f5;
+            --text-secondary: #b3b3b3;
+            --text-muted: #7a7a7a;
+            --border-color: #262626;
+            --accent: #d9d9d9;
+            
+            /* Logo Colors */
+            --logo-box: #ffffff;
+            --logo-letter: #000000;
+            
+            /* Grid */
+            --grid-line: rgba(255,255,255,0.04);
+        }
+
+        /* Light Theme: White & Grey */
+        [data-theme="light"] {
+            --bg-primary: #F3F4F6;
+            --bg-secondary: #FFFFFF;
+            --card-bg: #FFFFFF;
+            --text-primary: #111827;
+            --text-secondary: #4B5563;
+            --text-muted: #9CA3AF;
+            --border-color: #E5E7EB;
+            --accent: #111827;
+            
+            /* Logo Colors Inverted */
+            --logo-box: #111827;
+            --logo-letter: #ffffff;
+            
+            /* Grid */
+            --grid-line: rgba(0,0,0,0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); overflow-x: hidden; min-height: 100vh; }
-        .font-heading { font-family: 'Montserrat', sans-serif; }
 
-        /* Background & Effects */
-        .bg-gradient-animated { 
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%); 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; 
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+
+            /* 3D Grid */
+            background-image:
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            from { background-position: 0 0; }
+            to { background-position: 40px 40px; }
         }
         
-        /* 3D Grid Background - "Checkbox" Style */
-        .grid-3d-container {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            overflow: hidden;
-            pointer-events: none;
-            perspective: 400px; /* Creates the 3D depth */
-        }
-
-        .grid-3d {
-            position: absolute;
-            bottom: 0;
-            left: -50%;
-            width: 200%;
-            height: 200vh;
-            background-image: 
-                linear-gradient(var(--accent-purple) 1px, transparent 1px),
-                linear-gradient(90deg, var(--accent-purple) 1px, transparent 1px);
-            background-size: 50px 50px; /* Size of the "checkboxes" */
-            background-position: center bottom;
-            transform: rotateX(70deg) translateZ(-150px); /* Tilt to look 3D */
-            transform-origin: bottom center;
-            opacity: 0.15;
-            mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0) 70%); /* Fade out at top */
-            -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0) 70%);
-            animation: gridScroll 15s linear infinite;
-        }
-        
-        .grid-3d::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(6, 182, 212, 0.5) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(6, 182, 212, 0.5) 1px, transparent 1px);
-            background-size: 50px 50px;
-            background-position: center bottom;
-            opacity: 0.1;
-        }
-
-        @keyframes gridScroll {
-            0% { transform: rotateX(70deg) translateZ(-150px) translateY(0); }
-            100% { transform: rotateX(70deg) translateZ(-150px) translateY(50px); }
-        }
-
-        .orb { position: fixed; border-radius: 50%; filter: blur(120px); z-index: -1; animation: float 20s ease-in-out infinite; opacity: 0.4; pointer-events: none; }
-        .orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, var(--accent-purple-glow) 0%, transparent 70%); top: -200px; right: -200px; }
-        .orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, var(--accent-cyan-glow) 0%, transparent 70%); bottom: -150px; left: -150px; animation-delay: -5s; }
-        @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-20px, 20px) scale(0.95); } }
-
-        /* Glass */
-        .glass { background: rgba(20, 20, 30, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
-        .glass-card { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); border: 1px solid rgba(139, 92, 246, 0.1); border-radius: 20px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .glass-card:hover { border-color: rgba(139, 92, 246, 0.2); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; }
 
         /* Navbar */
-        .navbar { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; width: 95%; max-width: 1280px; }
-        .nav-link { position: relative; padding: 8px 16px; color: var(--text-secondary); font-weight: 500; transition: all 0.3s ease; }
-        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--accent-purple); transition: all 0.3s ease; transform: translateX(-50%); }
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            width: 95%;
+            max-width: 1280px;
+            background: rgba(11, 11, 11, 0.7); 
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Light Mode Navbar */
+        [data-theme="light"] .navbar {
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 8px 16px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
         .nav-link:hover, .nav-link.active { color: var(--text-primary); }
-        .nav-link:hover::after, .nav-link.active::after { width: 80%; }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background: var(--text-primary);
+            border-radius: 50%;
+        }
 
         /* Buttons */
-        .btn-primary { background: var(--accent-purple); padding: 14px 32px; border-radius: 12px; font-weight: 600; color: white; border: none; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
-        .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.1); }
-        .btn-secondary { background: transparent; padding: 14px 32px; border-radius: 12px; font-weight: 600; color: var(--text-primary); border: 1px solid rgba(139, 92, 246, 0.4); cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
-        .btn-secondary:hover { background: rgba(139, 92, 246, 0.1); border-color: var(--accent-purple); }
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--text-primary);
+        }
 
-        /* Hero */
-        .hero-title { font-size: clamp(2rem, 6vw, 5rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; }
-        .gradient-text { background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-cyan) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover { border-color: var(--text-primary); }
 
-        /* Page */
-        .page { display: none; opacity: 0; transform: translateY(20px); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: #3a3a3a;
+            transform: translateY(-2px);
+        }
+        [data-theme="light"] .card:hover {
+            border-color: #D1D5DB;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form Inputs */
+        .form-input {
+            background: var(--bg-primary); /* Matches page bg */
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px 18px;
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--text-secondary);
+        }
+
+        /* Page Transitions */
+        .page { display: none; opacity: 0; transform: translateY(10px); transition: all 0.4s ease; }
         .page.active { display: block; opacity: 1; transform: translateY(0); }
         
-        /* Form Inputs */
-        .form-input { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 12px; padding: 16px 20px; color: var(--text-primary); font-size: 16px; transition: all 0.3s ease; width: 100%; }
-        .form-input:focus { outline: none; border-color: var(--accent-purple); }
-        .form-input::placeholder { color: var(--text-secondary); }
-
         /* Mobile Menu */
-        .mobile-menu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(5, 5, 5, 0.98); z-index: 999; padding: 100px 30px; }
+        .mobile-menu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-primary); z-index: 999; padding: 100px 30px; }
         .mobile-menu.open { display: flex; flex-direction: column; gap: 10px; }
-        .mobile-nav-link { font-size: 22px; font-weight: 600; color: var(--text-primary); padding: 16px 0; border-bottom: 1px solid rgba(139, 92, 246, 0.2); text-decoration: none; }
+        .mobile-nav-link { font-size: 24px; font-weight: 600; color: var(--text-primary); padding: 16px 0; border-bottom: 1px solid var(--border-color); text-decoration: none; }
         .mobile-toggle { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; background: transparent; border: none; cursor: pointer; z-index: 1001; }
-        .hamburger-box { width: 24px; height: 20px; position: relative; }
-        .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after { width: 100%; height: 2px; background-color: var(--text-primary); position: absolute; left: 0; transition: transform 0.15s ease; }
-        .hamburger-inner { top: 50%; transform: translateY(-50%); }
-        .hamburger-inner::before, .hamburger-inner::after { content: ""; }
-        .hamburger-inner::before { top: -8px; }
-        .hamburger-inner::after { top: 8px; }
+        .mobile-toggle svg { stroke: var(--text-primary); }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+        }
+        .theme-toggle:hover {
+            background: var(--border-color);
+        }
 
         /* Responsive */
         @media (max-width: 768px) {
             .desktop-nav { display: none !important; }
             .mobile-toggle { display: flex !important; }
-            .navbar { top: 10px; width: calc(100% - 30px); padding: 8px 12px; }
-            .hero-title { font-size: 2rem; }
-            .orb { opacity: 0.2; }
-            .grid-3d { opacity: 0.1; background-size: 30px 30px; }
+            .navbar { top: 10px; width: calc(100% - 30px); padding: 12px 16px; border-radius: 16px; }
+            .hero-text { font-size: 2.5rem; }
+            .hero-image { display: none; }
         }
-        @media (min-width: 769px) { .mobile-menu { display: none !important; } }
 
-        /* Particles */
-        #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.4; }
-        .fade-up { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        /* Animations */
+        .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
     </style>
 </head>
 <body>
-    <!-- Background Layers -->
-    <div class="bg-gradient-animated"></div>
-    
-    <!-- 3D Grid Background -->
-    <div class="grid-3d-container">
-        <div class="grid-3d"></div>
-    </div>
-    
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <canvas id="particles-canvas"></canvas>
-    
-    <div class="fixed top-0 left-0 h-0.5 bg-purple-500 z-[1001]" id="scrollProgress"></div>
 
     <!-- Navbar -->
-    <nav class="navbar glass rounded-full px-4 md:px-6 py-3" id="navbar">
-        <div class="flex items-center justify-between gap-4 w-full">
-            <a href="#" class="flex items-center gap-2" onclick="showPage('home')">
-                <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                </div>
-                <span class="font-heading font-bold text-sm md:text-lg">DIGITRONCAST</span>
+    <nav class="navbar rounded-full px-4 md:px-6 py-3" id="navbar">
+        <div class="flex items-center justify-between w-full">
+            <a href="#" class="flex items-center gap-3" onclick="showPage('home')">
+                <!-- Dynamic Logo SVG -->
+                <svg width="36" height="36" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" rx="20" fill="var(--logo-box)"/>
+                    <rect x="28" y="22" width="8" height="56" rx="4" fill="var(--logo-letter)"/>
+                    <path d="M50 25 C75 25 80 40 80 50 C80 60 75 75 50 75" stroke="var(--logo-letter)" stroke-width="10" stroke-linecap="round" fill="none"/>
+                </svg>
+                <span class="font-bold text-lg tracking-tight">DIGITRONCAST</span>
             </a>
             
-            <div class="desktop-nav hidden md:flex items-center gap-2">
+            <div class="desktop-nav hidden md:flex items-center gap-1">
                 <a href="#" class="nav-link active" data-page="home" onclick="showPage('home')">Home</a>
-                <a href="#" class="nav-link" data-page="about" onclick="showPage('about')">About</a>
+                <a href="#" class="nav-link" data-page="about" onclick="showPage('about')">The Company</a>
                 <a href="#" class="nav-link" data-page="services" onclick="showPage('services')">Services</a>
-                <a href="#" class="nav-link" data-page="contact" onclick="showPage('contact')">Contact</a>
+                <a href="#" class="nav-link" data-page="contact" onclick="showPage('contact')">Get In Touch</a>
             </div>
             
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-3">
+                <!-- Theme Toggle Button -->
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <!-- Sun Icon (Show in Dark Mode to switch to Light) -->
+                    <svg id="sun-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <!-- Moon Icon (Show in Light Mode to switch to Dark) -->
+                    <svg id="moon-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+
                 <button class="btn-primary text-xs hidden md:block" onclick="showPage('contact')">Start the Conversation</button>
                 <button class="mobile-toggle" onclick="toggleMobileMenu()">
-                    <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
             </div>
         </div>
@@ -191,86 +272,101 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <a href="#" class="mobile-nav-link" onclick="showPage('home'); toggleMobileMenu()">Home</a>
-        <a href="#" class="mobile-nav-link" onclick="showPage('about'); toggleMobileMenu()">About</a>
+        <a href="#" class="mobile-nav-link" onclick="showPage('about'); toggleMobileMenu()">The Company</a>
         <a href="#" class="mobile-nav-link" onclick="showPage('services'); toggleMobileMenu()">Services</a>
-        <a href="#" class="mobile-nav-link" onclick="showPage('contact'); toggleMobileMenu()">Contact</a>
+        <a href="#" class="mobile-nav-link" onclick="showPage('contact'); toggleMobileMenu()">Get In Touch</a>
         <button class="btn-primary mt-8 w-full" onclick="showPage('contact'); toggleMobileMenu()">Start the Conversation</button>
     </div>
 
     <!-- HOME PAGE -->
     <main class="page active" id="page-home">
-        <section class="min-h-screen flex items-center pt-28 md:pt-32 pb-12 md:pb-20 px-4 md:px-6">
+        <section class="min-h-screen flex items-center pt-28 md:pt-32 pb-20 px-6">
             <div class="max-w-7xl mx-auto w-full">
-                <div class="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
-                    <div class="fade-up">
-                        <h1 class="hero-title font-heading mb-4 md:mb-6">
-                            Digital Marketing Designed to <span class="gradient-text">Find Your Audience</span>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <!-- Left Content -->
+                    <div class="max-w-xl fade-up">
+                        <span class="inline-block px-3 py-1 rounded-full text-xs font-medium border mb-6" style="border-color: var(--border-color); color: var(--text-secondary);">
+                            Incorporated October 2024 • Bangalore
+                        </span>
+                        <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight tracking-tight hero-text">
+                            Marketing systems built for clarity, not noise.
                         </h1>
-                        <p class="text-base md:text-lg text-gray-400 mb-6 md:mb-8 max-w-xl font-light leading-relaxed">
-                            Most marketing creates noise. We are building systems designed to deliver your message to the people who need to hear it, using data and AI to reduce waste.
+                        <p class="text-lg md:text-xl leading-relaxed mb-8" style="color: var(--text-secondary);">
+                            Most marketing is guesswork dressed up as strategy. We are building a different kind of company one that respects data, values transparency, and builds systems that actually work for new businesses.
                         </p>
-                        <div class="flex flex-wrap gap-3 md:gap-4">
-                            <button class="btn-primary text-sm" onclick="showPage('contact')">Start the Conversation</button>
-                            <button class="btn-secondary text-sm" onclick="showPage('services')">View Our Services</button>
-                        </div>
-                        
-                        <div class="flex items-center gap-6 md:gap-8 mt-8 md:mt-12 pt-6 md:pt-8 border-t border-gray-800">
-                            <div>
-                                <div class="text-xl md:text-2xl font-heading font-bold">Startup</div>
-                                <div class="text-xs md:text-sm text-gray-500">Agile Approach</div>
-                            </div>
-                            <div>
-                                <div class="text-xl md:text-2xl font-heading font-bold">Data First</div>
-                                <div class="text-xs md:text-sm text-gray-500">Decisions</div>
-                            </div>
-                            <div>
-                                <div class="text-xl md:text-2xl font-heading font-bold">Transparent</div>
-                                <div class="text-xs md:text-sm text-gray-500">Reporting</div>
-                            </div>
+                        <div class="flex flex-wrap gap-4">
+                            <button class="btn-primary" onclick="showPage('contact')">Start the Conversation</button>
+                            <button class="btn-secondary" onclick="showPage('services')">View Services</button>
                         </div>
                     </div>
-                    
-                    <div class="fade-up relative order-first lg:order-last hidden lg:block">
-                        <div class="glass-card p-1 relative overflow-hidden">
-                            <div class="relative w-full h-96 rounded-xl overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" alt="Dark Analytics Dashboard" class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-gradient-to-br from-purple-900/50 to-cyan-900/30 pointer-events-none mix-blend-multiply"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Services Overview -->
-        <section class="py-12 md:py-24 px-4 md:px-6">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-10 md:mb-16 fade-up">
-                    <span class="text-purple-400 font-semibold text-sm uppercase tracking-wider">What We Offer</span>
-                    <h2 class="font-heading text-3xl md:text-5xl font-bold mt-4 mb-4 md:mb-6">Services Built for Growth</h2>
-                    <p class="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">Marketing solutions designed to help new businesses find their footing and scale efficiently.</p>
+                    <!-- Right Image -->
+                    <div class="fade-up delay-2 hero-image hidden md:block">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" alt="Data Analytics Dashboard" class="rounded-2xl shadow-2xl border" style="border-color: var(--border-color);">
+                            <div class="absolute -bottom-6 -left-6 p-4 rounded-xl shadow-lg card">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background: var(--bg-secondary);">
+                                        <svg class="w-5 h-5" style="color: var(--text-primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs" style="color: var(--text-muted);">Growth Focus</p>
+                                        <p class="text-sm font-bold">Data Driven</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                    <div class="glass-card p-6 md:p-8 fade-up">
-                        <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+
+                <!-- Expanded Content Section -->
+                <div class="mt-32 border-t pt-16" style="border-color: var(--border-color);">
+                    
+                    <!-- New "The Approach" Section -->
+                    <div class="mb-20 fade-up">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">Our Approach</h2>
+                        <p class="text-center max-w-3xl mx-auto mb-12" style="color: var(--text-secondary);">
+                            We don't have decades of experience, and we won't pretend we do. What we offer is a clean slate, modern tools, and a commitment to logic over magic. We focus on the basics: clarity, measurement, and iteration.
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="card bg-opacity-50">
+                                <h3 class="font-bold text-lg mb-2">Transparent Logic</h3>
+                                <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">
+                                    Most agencies hide behind jargon. We explain every step. If a campaign isn't working, we tell you. If something is working, we double down. No black boxes, just clear reasoning.
+                                </p>
+                            </div>
+                            <div class="card bg-opacity-50">
+                                <h3 class="font-bold text-lg mb-2">Built for Today</h3>
+                                <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">
+                                    We aren't using playbooks from 2015. The market changes fast. Our methods are designed to adapt quickly. We use modern data tools to track what matters, ignoring vanity metrics.
+                                </p>
+                            </div>
                         </div>
-                        <h3 class="font-heading text-lg md:text-xl font-bold mb-2">AI-Ready Strategy</h3>
-                        <p class="text-gray-400 text-xs md:text-sm leading-relaxed">We design marketing strategies prepared to leverage AI tools as they become available.</p>
                     </div>
-                    <div class="glass-card p-6 md:p-8 fade-up">
-                        <div class="w-12 h-12 rounded-lg bg-cyan-500/20 flex items-center justify-center mb-4">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+
+                    <!-- Core Values Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="card fade-up delay-1">
+                            <div class="w-10 h-10 rounded-full border flex items-center justify-center mb-4" style="border-color: var(--text-primary);">
+                                <span class="font-bold">01</span>
+                            </div>
+                            <h3 class="font-bold text-lg mb-2">No Fake History</h3>
+                            <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">We are upfront about being a startup. We do not claim decades of experience. We have the skills, but we are honest about our journey.</p>
                         </div>
-                        <h3 class="font-heading text-lg md:text-xl font-bold mb-2">Search Optimisation</h3>
-                        <p class="text-gray-400 text-xs md:text-sm leading-relaxed">Technical setup and content structure designed to help search engines understand your value.</p>
-                    </div>
-                    <div class="glass-card p-6 md:p-8 fade-up">
-                        <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                        <div class="card fade-up delay-2">
+                            <div class="w-10 h-10 rounded-full border flex items-center justify-center mb-4" style="border-color: var(--text-primary);">
+                                <span class="font-bold">02</span>
+                            </div>
+                            <h3 class="font-bold text-lg mb-2">Process Focused</h3>
+                            <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">We document our methods. You will always know what we are doing and why we are doing it. No vague promises or "trust us".</p>
                         </div>
-                        <h3 class="font-heading text-lg md:text-xl font-bold mb-2">Paid Media Frameworks</h3>
-                        <p class="text-gray-400 text-xs md:text-sm leading-relaxed">Structured ad campaigns on Google and Meta platforms built for testing and learning.</p>
+                        <div class="card fade-up delay-3">
+                            <div class="w-10 h-10 rounded-full border flex items-center justify-center mb-4" style="border-color: var(--text-primary);">
+                                <span class="font-bold">03</span>
+                            </div>
+                            <h3 class="font-bold text-lg mb-2">Designed to Scale</h3>
+                            <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">Our systems are built to handle growth. We start small, test what works, and expand only when the data supports it.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -279,32 +375,45 @@
 
     <!-- ABOUT PAGE -->
     <main class="page" id="page-about">
-        <section class="min-h-screen pt-28 md:pt-32 pb-12 md:pb-20 px-4 md:px-6">
-            <div class="max-w-7xl mx-auto">
-                <div class="grid lg:grid-cols-2 gap-10 md:gap-16 items-center mb-16 md:mb-24">
-                    <div class="fade-up">
-                        <span class="text-cyan-400 font-semibold text-sm uppercase tracking-wider">The Company</span>
-                        <h2 class="font-heading text-3xl md:text-5xl font-bold mt-4 mb-4 md:mb-6">Incorporated to Modernise Marketing</h2>
-                        <p class="text-gray-400 mb-4 leading-relaxed text-sm md:text-base">Marketing is often treated as guesswork. Digitroncast Marketing Solutions Private Limited was incorporated in October 2024 to apply rigorous data methods to this problem.</p>
-                        <p class="text-gray-400 mb-4 leading-relaxed text-sm md:text-base">We are a startup team focused on building reliable, repeatable systems for digital growth. We do not claim a long history. We claim a fresh perspective.</p>
-                        
-                        <div class="mt-8 p-6 glass-card">
-                            <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-2">Company Details</h4>
-                            <p class="text-xs text-gray-500">Digitroncast Marketing Solutions Private Limited</p>
-                            <p class="text-xs text-gray-500">Incorporated 15 October 2024</p>
-                            <p class="text-xs text-gray-500">Bangalore, Karnataka</p>
-                        </div>
-                    </div>
+        <section class="min-h-screen pt-28 md:pt-32 pb-20 px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-16 fade-up">
+                    <span class="text-sm font-semibold uppercase tracking-wider" style="color: var(--text-muted);">The Company</span>
+                    <h1 class="text-4xl md:text-5xl font-bold mt-4 mb-8 tracking-tight">
+                        Why we started.
+                    </h1>
                     
-                    <div class="fade-up">
-                        <div class="glass-card p-6 md:p-8 relative">
-                            <h3 class="font-heading text-xl font-bold mb-4">Our Focus Areas</h3>
-                            <ul class="text-gray-400 text-xs md:text-sm space-y-3">
-                                <li class="flex items-start gap-2"><span class="text-purple-400 mt-1">•</span>Building data literacy in marketing decisions</li>
-                                <li class="flex items-start gap-2"><span class="text-purple-400 mt-1">•</span>Transparent campaign reporting</li>
-                                <li class="flex items-start gap-2"><span class="text-purple-400 mt-1">•</span>Scalable automation setups</li>
-                                <li class="flex items-start gap-2"><span class="text-purple-400 mt-1">•</span>Clear communication on spend and results</li>
-                            </ul>
+                    <div class="space-y-6 leading-relaxed text-lg card" style="color: var(--text-secondary);">
+                        <p>
+                            Many agencies sell magic. We sell process. Digitroncast Marketing Solutions Private Limited was incorporated in October 2024 because we saw a gap in how digital marketing is delivered to small and medium businesses.
+                        </p>
+                        <p>
+                            Too often, marketing is opaque. Reports are confusing. Strategies are hidden behind jargon. We are building a company designed to change that. We write down what we do. We explain the logic behind every decision.
+                        </p>
+                        <p>
+                            We are not a team of "seasoned experts" claiming 20 years of experience. We are a focused group building systems for the modern web, using data to inform decisions and transparency to build trust.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-t pt-12 fade-up" style="border-color: var(--border-color);">
+                    <h3 class="font-bold text-sm uppercase tracking-wider mb-6" style="color: var(--text-muted);">Registered Details</h3>
+                    <div class="grid md:grid-cols-2 gap-8 text-sm card p-6">
+                        <div>
+                            <p class="font-semibold mb-1">Legal Name</p>
+                            <p style="color: var(--text-secondary);">Digitroncast Marketing Solutions Private Limited</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold mb-1">Incorporation Date</p>
+                            <p style="color: var(--text-secondary);">15 October 2024</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold mb-1">Location</p>
+                            <p style="color: var(--text-secondary);">Bangalore, Karnataka</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold mb-1">CIN</p>
+                            <p style="color: var(--text-secondary);">U74999KA2024PTC192XXX</p>
                         </div>
                     </div>
                 </div>
@@ -314,29 +423,57 @@
 
     <!-- SERVICES PAGE -->
     <main class="page" id="page-services">
-        <section class="min-h-screen pt-28 md:pt-32 pb-12 md:pb-20 px-4 md:px-6">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-10 md:mb-16 fade-up">
-                    <span class="text-purple-400 font-semibold text-sm uppercase tracking-wider">Our Services</span>
-                    <h1 class="font-heading text-3xl md:text-6xl font-bold mt-4 mb-4 md:mb-6">What We Build</h1>
-                    <p class="text-gray-400 max-w-2xl mx-auto text-sm md:text-lg">Services designed to address specific growth challenges for new and scaling businesses.</p>
+        <section class="min-h-screen pt-28 md:pt-32 pb-20 px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="mb-16 fade-up">
+                    <span class="text-sm font-semibold uppercase tracking-wider" style="color: var(--text-muted);">What We Build</span>
+                    <h1 class="text-4xl md:text-5xl font-bold mt-4 mb-8 tracking-tight">Services.</h1>
+                    <p class="text-lg max-w-2xl" style="color: var(--text-secondary);">
+                        We offer specific services designed to solve specific problems. We do not sell packages; we build solutions.
+                    </p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                    <div class="glass-card p-6 md:p-8 group fade-up">
-                        <h3 class="font-heading text-lg md:text-xl font-bold mb-2">Search Engine Optimisation (SEO)</h3>
-                        <p class="text-gray-400 text-xs md:text-sm leading-relaxed mb-4">We structure websites and content to be easily understood by search engines. This is designed to improve visibility over time for relevant search queries.</p>
+
+                <div class="grid gap-8">
+                    <div class="card fade-up">
+                        <div class="flex items-start gap-6">
+                            <div class="w-12 h-12 rounded-full border flex items-center justify-center flex-shrink-0 mt-1" style="border-color: var(--border-color); background: var(--bg-primary);">
+                                <span class="font-bold">01</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Search Engine Optimisation (SEO)</h3>
+                                <p class="leading-relaxed mb-4" style="color: var(--text-secondary);">
+                                    We structure your website content to be easily understood by search engines. This is designed to improve visibility over time for relevant search queries, not overnight tricks.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="glass-card p-6 md:p-8 group fade-up">
-                        <h3 class="font-heading text-lg md:text-xl font-bold mb-2">Paid Advertising (PPC)</h3>
-                        <p class="text-gray-400 text-xs md:text-sm leading-relaxed mb-4">We set up and manage paid campaigns on Google Ads and Meta platforms. Our focus is on clear targeting and measurable outcomes.</p>
+
+                    <div class="card fade-up">
+                        <div class="flex items-start gap-6">
+                            <div class="w-12 h-12 rounded-full border flex items-center justify-center flex-shrink-0 mt-1" style="border-color: var(--border-color); background: var(--bg-primary);">
+                                <span class="font-bold">02</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Paid Advertising (PPC)</h3>
+                                <p class="leading-relaxed mb-4" style="color: var(--text-secondary);">
+                                    We set up and manage campaigns on Google and Meta platforms. Our focus is on clear targeting, defined budgets, and measurable outcomes.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="glass-card p-6 md:p-8 group fade-up">
-                        <h3 class="font-heading text-lg md:text-xl font-bold mb-2">Social Media Management</h3>
-                        <p class="text-gray-400 text-xs md:text-sm leading-relaxed mb-4">We create content calendars and posting schedules designed to build a consistent brand presence across platforms.</p>
-                    </div>
-                    <div class="glass-card p-6 md:p-8 group fade-up">
-                        <h3 class="font-heading text-lg md:text-xl font-bold mb-2">Website Development</h3>
-                        <p class="text-gray-400 text-xs md:text-sm leading-relaxed mb-4">We build websites focused on speed, clarity, and conversion path design. These sites are built to serve as effective landing points for your traffic.</p>
+
+                    <div class="card fade-up">
+                        <div class="flex items-start gap-6">
+                            <div class="w-12 h-12 rounded-full border flex items-center justify-center flex-shrink-0 mt-1" style="border-color: var(--border-color); background: var(--bg-primary);">
+                                <span class="font-bold">03</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Website Development</h3>
+                                <p class="leading-relaxed mb-4" style="color: var(--text-secondary);">
+                                    We build websites focused on speed, clarity, and conversion paths. These sites are built to serve as effective landing points for your traffic.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -345,62 +482,55 @@
 
     <!-- CONTACT PAGE -->
     <main class="page" id="page-contact">
-        <section class="min-h-screen pt-28 md:pt-32 pb-12 md:pb-20 px-4 md:px-6">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-10 md:mb-16 fade-up">
-                    <span class="text-purple-400 font-semibold text-sm uppercase tracking-wider">Contact</span>
-                    <h1 class="font-heading text-3xl md:text-6xl font-bold mt-4 mb-4 md:mb-6">Get In Touch</h1>
-                </div>
+        <section class="min-h-screen pt-28 md:pt-32 pb-20 px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <div class="fade-up">
+                        <span class="text-sm font-semibold uppercase tracking-wider" style="color: var(--text-muted);">Contact</span>
+                        <h1 class="text-4xl md:text-5xl font-bold mt-4 mb-8 tracking-tight">Get In Touch.</h1>
+                        
+                        <div class="space-y-6 mb-8" style="color: var(--text-secondary);">
+                            <p>
+                                We respond within one working day. If you have a project in mind or a question about how we work, fill out the form.
+                            </p>
+                        </div>
 
-                <div class="grid lg:grid-cols-2 gap-8 md:gap-12">
-                    <div class="glass-card p-6 md:p-10 fade-up">
-                        <h2 class="font-heading text-xl md:text-2xl font-bold mb-2">Send a Message</h2>
-                        <p class="text-gray-400 text-xs mb-6">We respond within one working day.</p>
-                        <form id="contactForm" class="space-y-4 md:space-y-6">
+                        <div class="space-y-6">
                             <div>
-                                <label class="block text-xs md:text-sm font-medium mb-2" for="name">Full Name</label>
-                                <input type="text" id="name" class="form-input text-sm md:text-base" placeholder="Enter your name" required>
+                                <h4 class="font-bold text-sm uppercase tracking-wider mb-2" style="color: var(--text-muted);">Email</h4>
+                                <a href="mailto:contact@digitroncast.in" class="text-lg transition-colors" style="color: var(--text-secondary);">contact@digitroncast.in</a>
                             </div>
                             <div>
-                                <label class="block text-xs md:text-sm font-medium mb-2" for="email">Email Address</label>
-                                <input type="email" id="email" class="form-input text-sm md:text-base" placeholder="Enter your email" required>
-                            </div>
-                            <div>
-                                <label class="block text-xs md:text-sm font-medium mb-2" for="phone">Phone Number</label>
-                                <input type="tel" id="phone" class="form-input text-sm md:text-base" placeholder="Enter your phone number">
-                            </div>
-                            <div>
-                                <label class="block text-xs md:text-sm font-medium mb-2" for="message">Message</label>
-                                <textarea id="message" class="form-input h-24 md:h-32 resize-none text-sm md:text-base" placeholder="Tell us about your project" required></textarea>
-                            </div>
-                            <button type="submit" class="btn-primary w-full text-sm">Start the Conversation</button>
-                        </form>
-                    </div>
-
-                    <div class="space-y-6 md:space-y-8 fade-up">
-                        <div class="glass-card p-6 md:p-8">
-                            <h3 class="font-heading text-lg md:text-xl font-bold mb-4 md:mb-6">Contact Information</h3>
-                            <div class="space-y-4 md:space-y-6">
-                                <div class="flex items-start gap-3 md:gap-4">
-                                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-purple-500/20 flex items-center justify-center flex-shrink-0">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold text-sm md:text-base mb-1">Email</div>
-                                        <a href="mailto:contact@digitroncastate-sol.in" class="text-gray-400 hover:text-purple-400 transition-colors text-xs md:text-sm">contact@digitroncastate-sol.in</a>
-                                    </div>
-                                </div>
-                                <div class="flex items-start gap-3 md:gap-4">
-                                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold text-sm md:text-base mb-1">Office Address</div>
-                                        <p class="text-gray-400 text-xs md:text-sm leading-relaxed">C1 & 02 Sy No 132/2/3, Halasahalli Main Road, Vartur, Bangalore South, Karnataka, India - 560087</p>
-                                    </div>
-                                </div>
+                                <h4 class="font-bold text-sm uppercase tracking-wider mb-2" style="color: var(--text-muted);">Address</h4>
+                                <p style="color: var(--text-secondary);">
+                                    C1 & 02 Sy No 132/2/3,<br>
+                                    Halasahalli Main Road, Vartur,<br>
+                                    Bangalore South, Karnataka, India - 560087
+                                </p>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="card fade-up p-8">
+                        <form id="contactForm" class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Full Name</label>
+                                <input type="text" id="name" class="form-input" placeholder="Your name" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Email Address</label>
+                                <input type="email" id="email" class="form-input" placeholder="you@company.com" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Phone Number</label>
+                                <input type="tel" id="phone" class="form-input" placeholder="+91 00000 00000">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Message</label>
+                                <textarea id="message" rows="4" class="form-input" placeholder="Tell us about your project" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary w-full">Start the Conversation</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -408,71 +538,75 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-gray-800/50 py-10 md:py-16 px-4 md:px-6 relative z-10">
+    <footer class="border-t py-12 px-6 relative z-10" style="border-color: var(--border-color); background: var(--bg-primary);">
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12 mb-8 md:mb-12">
-                <div class="col-span-2 md:col-span-1">
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                        </div>
-                        <span class="font-heading font-bold text-base">DIGITRONCAST</span>
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+                <div>
+                    <!-- Logo in Footer -->
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="100" rx="20" fill="var(--logo-box)"/>
+                            <rect x="28" y="22" width="8" height="56" rx="4" fill="var(--logo-letter)"/>
+                            <path d="M50 25 C75 25 80 40 80 50 C80 60 75 75 50 75" stroke="var(--logo-letter)" stroke-width="10" stroke-linecap="round" fill="none"/>
+                        </svg>
+                        <span class="font-bold text-lg tracking-tight">DIGITRONCAST</span>
                     </div>
-                    <p class="text-gray-400 text-xs">Incorporated 2024.</p>
+                    <p class="text-xs" style="color: var(--text-muted);">Digitroncast Marketing Solutions Private Limited.<br>Incorporated October 2024.</p>
                 </div>
-                <div>
-                    <h4 class="font-heading font-bold text-sm mb-3">Quick Links</h4>
-                    <ul class="space-y-1">
-                        <li><a href="#" onclick="showPage('home')" class="text-gray-400 hover:text-purple-400 text-xs">Home</a></li>
-                        <li><a href="#" onclick="showPage('about')" class="text-gray-400 hover:text-purple-400 text-xs">About</a></li>
-                        <li><a href="#" onclick="showPage('services')" class="text-gray-400 hover:text-purple-400 text-xs">Services</a></li>
-                        <li><a href="#" onclick="showPage('contact')" class="text-gray-400 hover:text-purple-400 text-xs">Contact</a></li>
-                    </ul>
+
+                <div class="flex gap-8">
+                    <div>
+                        <h4 class="font-bold text-sm mb-3">Navigation</h4>
+                        <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
+                            <li><a href="#" onclick="showPage('home')" class="hover:opacity-80">Home</a></li>
+                            <li><a href="#" onclick="showPage('about')" class="hover:opacity-80">The Company</a></li>
+                            <li><a href="#" onclick="showPage('services')" class="hover:opacity-80">Services</a></li>
+                            <li><a href="#" onclick="showPage('contact')" class="hover:opacity-80">Get In Touch</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm mb-3">Legal</h4>
+                        <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
+                            <li><a href="#" onclick="showPage('legal')" class="hover:opacity-80">Privacy & Terms</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div>
-                    <h4 class="font-heading font-bold text-sm mb-3">Services</h4>
-                    <ul class="space-y-1">
-                        <li class="text-gray-400 text-xs">SEO</li>
-                        <li class="text-gray-400 text-xs">Paid Ads</li>
-                        <li class="text-gray-400 text-xs">Websites</li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-heading font-bold text-sm mb-3">Legal</h4>
-                    <ul class="space-y-1">
-                        <li><a href="#" onclick="showPage('legal')" class="text-gray-400 hover:text-purple-400 text-xs">Privacy & Terms</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-800/50 pt-6 text-center">
-                <p class="text-gray-500 text-xs">Digitroncast Marketing Solutions Private Limited. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- LEGAL PAGE -->
     <main class="page" id="page-legal">
-        <section class="min-h-screen pt-28 md:pt-32 pb-12 md:pb-20 px-4 md:px-6">
-            <div class="max-w-3xl mx-auto">
-                <div class="text-center mb-10 md:mb-16 fade-up">
-                    <h1 class="font-heading text-3xl md:text-5xl font-bold mt-4 mb-4">Privacy & Terms</h1>
-                    <p class="text-gray-500 text-sm">Dated October 2024</p>
-                </div>
-                
-                <div class="prose prose-invert max-w-none fade-up space-y-6 text-gray-400 text-sm leading-relaxed">
-                    <p>These terms govern your use of this website. Digitroncast Marketing Solutions Private Limited ("we", "us", or "our") operates this site to provide information about our services.</p>
+        <section class="min-h-screen pt-28 md:pt-32 pb-20 px-6">
+            <div class="max-w-3xl mx-auto fade-up">
+                <span class="text-sm font-semibold uppercase tracking-wider" style="color: var(--text-muted);">Legal</span>
+                <h1 class="text-4xl font-bold mt-4 mb-2 tracking-tight">Privacy & Terms</h1>
+                <p class="text-sm mb-12" style="color: var(--text-muted);">Dated October 2024</p>
+
+                <div class="prose max-w-none space-y-8 card" style="color: var(--text-secondary);">
+                    <p>
+                        These terms govern your use of this website. Digitroncast Marketing Solutions Private Limited ("we", "us", or "our") operates this site to provide information about our services.
+                    </p>
                     
-                    <h3 class="font-heading text-xl text-white font-bold">Data Handling</h3>
-                    <p>We collect information you provide directly, such as when you fill out a contact form. We use this information solely to respond to your inquiries. We do not sell or rent personal data to third parties.</p>
+                    <h3 class="text-lg font-bold mt-8">Data Handling</h3>
+                    <p>
+                        We collect information you provide directly, such as when you fill out a contact form. We use this information solely to respond to your inquiries. We do not sell or rent personal data to third parties.
+                    </p>
                     
-                    <h3 class="font-heading text-xl text-white font-bold">Data Retention and Deletion</h3>
-                    <p>You have the right to request to see, correct, or delete the personal data we hold about you. To make such a request, please contact us at contact@digitroncastate-sol.in. We will respond within 30 days.</p>
+                    <h3 class="text-lg font-bold mt-8">Data Retention and Deletion</h3>
+                    <p>
+                        You have the right to request to see, correct, or delete the personal data we hold about you. To make such a request, please contact us at contact@digitroncast.in. We will respond within 30 days.
+                    </p>
                     
-                    <h3 class="font-heading text-xl text-white font-bold">Security Commitment</h3>
-                    <p>As a new enterprise, we are committed to applying appropriate security measures to protect your data as our systems develop.</p>
+                    <h3 class="text-lg font-bold mt-8">Security Commitment</h3>
+                    <p>
+                        As a new enterprise, we are committed to applying appropriate security measures to protect your data as our systems develop.
+                    </p>
                     
-                    <h3 class="font-heading text-xl text-white font-bold">Governing Law</h3>
-                    <p>These terms are governed by the laws of India. Any disputes will be subject to the exclusive jurisdiction of the courts in Bangalore, Karnataka.</p>
+                    <h3 class="text-lg font-bold mt-8">Governing Law</h3>
+                    <p>
+                        These terms are governed by the laws of India. Any disputes will be subject to the exclusive jurisdiction of the courts in Bangalore, Karnataka.
+                    </p>
                 </div>
             </div>
         </section>
@@ -482,11 +616,6 @@
         let currentPage = 'home';
         const pages = document.querySelectorAll('.page');
         const navLinks = document.querySelectorAll('.nav-link');
-        const scrollProgress = document.getElementById('scrollProgress');
-        const navbar = document.getElementById('navbar');
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
         
         function showPage(pageName) {
             currentPage = pageName;
@@ -506,50 +635,43 @@
         function toggleMobileMenu() {
             document.getElementById('mobileMenu').classList.toggle('open');
         }
-        
-        function updateScrollProgress() {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            scrollProgress.style.width = (scrollTop / docHeight) * 100 + '%';
-        }
-        
-        function triggerAnimations() {
-            const fadeElements = document.querySelectorAll('.fade-up');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-            }, { threshold: 0.1 });
-            fadeElements.forEach(el => observer.observe(el));
-        }
-        
-        function initParticles() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            particles = [];
-            const count = Math.min(30, Math.floor(window.innerWidth / 40));
-            for (let i = 0; i < count; i++) {
-                particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.max(1, Math.random() * 2), vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5, alpha: Math.random() * 0.3 + 0.1 });
+
+        // Theme Toggler Logic
+        function toggleTheme() {
+            const html = document.documentElement;
+            const sunIcon = document.getElementById('sun-icon');
+            const moonIcon = document.getElementById('moon-icon');
+            
+            if (html.getAttribute('data-theme') === 'light') {
+                html.removeAttribute('data-theme');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+                localStorage.setItem('theme', 'light');
             }
         }
-        
-        function animateParticles() {
-            if (!ctx || !canvas) return;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.x += p.vx; p.y += p.vy;
-                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(139, 92, 246, ${p.alpha})`;
-                ctx.fill();
-            });
-            requestAnimationFrame(animateParticles);
-        }
-        
-        function init() {
+
+        // Check for saved theme preference on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            const sunIcon = document.getElementById('sun-icon');
+            const moonIcon = document.getElementById('moon-icon');
+
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            } else {
+                // Default is dark
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            }
+            
             triggerAnimations();
-            initParticles();
-            animateParticles();
             
             const form = document.getElementById('contactForm');
             if(form) {
@@ -568,11 +690,15 @@
                     }, 1000);
                 });
             }
+        });
+
+        function triggerAnimations() {
+            const fadeElements = document.querySelectorAll('.fade-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+            }, { threshold: 0.1 });
+            fadeElements.forEach(el => observer.observe(el));
         }
-        
-        window.addEventListener('scroll', updateScrollProgress);
-        window.addEventListener('resize', initParticles);
-        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
